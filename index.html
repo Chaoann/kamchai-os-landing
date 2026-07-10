@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Workflow OS — ระบบทำงานด้วย AI สำหรับคนไทยที่อยากทำงานเทพโดยไม่พัง</title>
+<meta name="description" content="เทมเพลต Notion + 50 AI prompts ภาษาไทย + แผนติดตั้ง 7 วัน — ระบบทำงานที่ CEO ตัวจริงใช้ทุกวัน เริ่มใช้ได้ใน 30 นาที">
+<meta property="og:title" content="AI Workflow OS — ทำงานเทพโดยไม่พัง">
+<meta property="og:description" content="เทมเพลต Notion + 50 AI prompts ภาษาไทย + แผนติดตั้ง 7 วัน เริ่มใช้ได้ใน 30 นาที">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0c1a15">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================= CONFIG สี/สไตล์แบรนด์ ================= */
+:root{
+  --ink:#0c1a15;      /* พื้นหลังหลัก */
+  --pine:#122620;     /* พื้นการ์ด */
+  --moss:#1e3a30;     /* เส้นขอบ */
+  --sage:#8fac9d;     /* ตัวอักษรรอง */
+  --cream:#f3eee1;    /* ตัวอักษรหลัก */
+  --gold:#c8a96a;     /* accent */
+  --gold-soft:#e6d3a3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--cream);
+  font-family:'IBM Plex Sans Thai',system-ui,sans-serif;
+  font-size:17px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--gold);color:var(--ink)}
+.wrap{max-width:640px;margin:0 auto;padding:0 22px}
+section{padding:56px 0}
+h1,h2,h3{line-height:1.3;text-wrap:balance}
+h2{font-size:1.7rem;margin-bottom:20px}
+.eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.muted{color:var(--sage)}
+.hairline{border:none;border-top:1px solid var(--moss);max-width:640px;margin:0 auto}
+/* ปุ่ม */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:56px;padding:14px 28px;border-radius:999px;
+  background:var(--gold);color:var(--ink);
+  font-size:1.05rem;font-weight:700;text-decoration:none;
+  transition:background .2s, transform .1s;
+}
+.btn:hover{background:var(--gold-soft)}
+.btn:active{transform:scale(.98)}
+.btn-sub{display:block;text-align:center;font-size:.82rem;color:var(--sage);margin-top:10px}
+/* การ์ด */
+.card{background:var(--pine);border:1px solid var(--moss);border-radius:22px;padding:26px}
+/* HERO */
+.hero{padding:72px 0 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;top:-140px;left:50%;transform:translateX(-50%);
+  width:480px;height:340px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(200,169,106,.22),transparent);
+  pointer-events:none;
+}
+.hero h1{font-size:clamp(1.9rem,7.5vw,2.7rem);font-weight:700}
+.hero h1 .accent{color:var(--gold)}
+.hero .sub{margin:18px auto 0;max-width:34ch;color:var(--sage)}
+.hero .brandline{margin-top:26px;font-size:.85rem;color:var(--sage);opacity:.85}
+/* PAIN */
+.pain-list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.pain-item{display:flex;gap:14px;align-items:flex-start;background:var(--pine);border:1px solid var(--moss);border-radius:18px;padding:18px 20px}
+.pain-item .no{color:var(--gold);font-weight:700;flex-shrink:0}
+/* OFFER bullets */
+.offer-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--moss)}
+.offer-item:last-child{border-bottom:none}
+.offer-item .icon{flex-shrink:0;font-size:1.3rem;line-height:1.5}
+.offer-item h3{font-size:1.05rem;margin-bottom:4px}
+.offer-item p{font-size:.92rem;color:var(--sage)}
+.offer-item .val{display:inline-block;margin-top:6px;font-size:.78rem;font-weight:600;color:var(--gold);border:1px solid var(--moss);border-radius:999px;padding:2px 10px}
+/* screenshot placeholder */
+.shot{
+  aspect-ratio:4/3;border:1.5px dashed rgba(200,169,106,.5);border-radius:18px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:var(--gold);font-size:.9rem;padding:20px;
+  background:repeating-linear-gradient(-45deg,transparent 0 14px,rgba(200,169,106,.05) 14px 28px);
+}
+.shots{display:grid;gap:14px;margin-top:8px}
+@media(min-width:520px){.shots{grid-template-columns:1fr 1fr}}
+/* PRICE */
+.price-card{text-align:center;border-color:rgba(200,169,106,.55);box-shadow:0 0 70px -25px rgba(200,169,106,.4)}
+.price-old{color:var(--sage);text-decoration:line-through;font-size:1.15rem}
+.price-now{font-size:3.2rem;font-weight:700;color:var(--gold-soft);line-height:1.1}
+.price-note{font-size:.9rem;color:var(--sage);margin-top:6px}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 22px}
+.badge{font-size:.78rem;color:var(--sage);border:1px solid var(--moss);border-radius:999px;padding:5px 12px}
+/* countdown */
+.count{display:flex;gap:10px;justify-content:center;margin:20px 0 6px}
+.count .unit{background:var(--ink);border:1px solid var(--moss);border-radius:14px;min-width:64px;padding:10px 6px}
+.count .num{font-size:1.6rem;font-weight:700;color:var(--gold-soft);font-variant-numeric:tabular-nums}
+.count .lbl{font-size:.68rem;color:var(--sage)}
+/* HOW TO BUY */
+.step{display:flex;gap:16px;margin-bottom:18px;align-items:flex-start}
+.step .n{
+  flex-shrink:0;width:38px;height:38px;border-radius:50%;
+  background:var(--gold);color:var(--ink);font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:1.02rem}
+.step p{font-size:.92rem;color:var(--sage)}
+.pp-box{
+  margin-top:6px;background:var(--ink);border:1px solid var(--moss);
+  border-radius:14px;padding:12px 16px;font-size:.95rem;
+}
+.pp-box b{color:var(--gold-soft)}
+/* FAQ */
+details{border-bottom:1px solid var(--moss);padding:16px 0}
+details:last-of-type{border-bottom:none}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--gold);font-weight:700;flex-shrink:0}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;font-size:.94rem;color:var(--sage)}
+/* footer */
+footer{padding:44px 0 60px;text-align:center;font-size:.82rem;color:var(--sage)}
+footer .fine{opacity:.75;max-width:44ch;margin:12px auto 0}
+/* sticky CTA มือถือ */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(transparent,rgba(12,26,21,.92) 30%);
+  display:none;
+}
+.sticky-cta .btn{min-height:52px;font-size:1rem;box-shadow:0 8px 30px -8px rgba(200,169,106,.5)}
+.sticky-cta.show{display:block}
+@media(min-width:720px){.sticky-cta{display:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ 1. HERO / HOOK ============ -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Work &amp; Live to 120 yrs</p>
+    <h1>เลิกเริ่มวันด้วยความมึน<br>ว่า<span class="accent">จะทำอะไรก่อนดี</span></h1>
+    <p class="sub">AI Workflow OS — ระบบทำงานด้วย AI สำหรับคนไทยที่อยากทำงานเทพโดยไม่พัง ติดตั้งเสร็จใน 7 วัน วันละ 20 นาที</p>
+    <div style="margin-top:30px">
+      <a class="btn js-cta" href="#">🛒 สั่งซื้อผ่าน LINE — ราคาเปิดตัว 390.-</a>
+      <span class="btn-sub">รับของทันทีหลังโอน · จ่ายผ่าน PromptPay</span>
+    </div>
+    <p class="brandline">ทำงานเทพ · สุขภาพเทพ · สำเร็จโดยไม่พัง</p>
+  </div>
+</header>
+
+<hr class="hairline">
+
+<!-- ============ 2. PAIN ============ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">ถ้าข้อไหนตรง อ่านต่อเถอะครับ</p>
+    <h2>อาการของคนเก่ง<br>ที่ยังไม่มี "ระบบ"</h2>
+    <div class="pain-list">
+      <div class="pain-item"><span class="no">01</span><p><b>เปิดคอม 8 โมง แต่เริ่มงานจริง 10 โมง</b><br><span class="muted">เช็คแชท ไถฟีด ตอบอีเมลจิปาถะ — พลังสมองช่วงดีที่สุดของวัน หมดไปกับเรื่องที่ใครทำแทนก็ได้</span></p></div>
+      <div class="pain-item"><span class="no">02</span><p><b>to-do list ยาว 20 ข้อ แต่ตอบไม่ได้ว่าวันนี้ "ชนะ" เรื่องอะไร</b><br><span class="muted">ยุ่งทั้งวัน เหนื่อยจริง แต่งานที่ขยับชีวิตขยับธุรกิจ ไม่คืบสักข้อ</span></p></div>
+      <div class="pain-item"><span class="no">03</span><p><b>รู้ว่า AI ช่วยได้ แต่เปิดมาแล้วก็นั่งมองจอ</b><br><span class="muted">ไม่รู้จะพิมพ์สั่งยังไงให้ได้งานแบบที่ต้องการ — เลยกลับไปทำเองเหมือนเดิมทุกที</span></p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 3. SOLUTION INTRO ============ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">ทางออกไม่ใช่ขยันขึ้น</p>
+    <h2>ปัญหาไม่ใช่ตัวคุณ<br>แต่คือการทำงานแบบไม่มีระบบ</h2>
+    <p class="muted">ผมคือกำชัย — CEO ที่บริหารธุรกิจจริงทุกวัน ผมเคยเป็นครบทั้ง 3 ข้อข้างบน จนต้องสร้างระบบขึ้นมาใช้เอง: ที่เก็บงานที่เดียวทั้งชีวิต, กติกาเลือกงานสำคัญ 3 ชิ้นต่อวัน, คลังคำสั่ง AI ที่หยิบใช้ได้ทันที และพิธีทบทวนทุกสัปดาห์ที่กันไม่ให้ "สำเร็จแบบพัง"</p>
+    <p class="muted" style="margin-top:14px"><b style="color:var(--cream)">AI Workflow OS คือระบบนั้นทั้งชุด</b> — ไม่ใช่คอร์สให้นั่งดูเป็นสิบชั่วโมงแล้วลืม แต่เป็นของที่ติดตั้งแล้ว "ใช้" ทุกวัน เขียนเป็นภาษาไทยทั้งหมด สำหรับคนที่ไม่ได้เก่งเทคโนโลยี</p>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 4. WHAT'S INSIDE ============ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">ได้อะไรบ้างในแพ็กเดียว</p>
+    <h2>ของจริง 4 ชิ้น ใช้ได้ตั้งแต่วันแรก</h2>
+    <div class="card" style="padding:10px 26px">
+      <div class="offer-item"><span class="icon">🏗</span><div>
+        <h3>พิมพ์เขียว Notion Template ครบระบบ</h3>
+        <p>Daily Command Center · Task + Energy Tracker · Prompt Vault · Weekly Review · 90-Day Goal Board — สอนสร้างตามทีละคลิก ได้ระบบเป็นของคุณเอง 100%</p>
+        <span class="val">แกนของทั้งระบบ</span>
+      </div></div>
+      <div class="offer-item"><span class="icon">🧠</span><div>
+        <h3>คลัง 50 AI Prompts ภาษาไทย</h3>
+        <p>5 หมวด: จัดการงาน / เขียนคอนเทนต์ / วิเคราะห์ข้อมูล / ประชุม-อีเมล / วางแผนสัปดาห์ — ทุกตัวมีตัวอย่าง input + output จริง copy แล้วใช้ได้เลย</p>
+        <span class="val">หมวดละ 10 prompts × 5 หมวด</span>
+      </div></div>
+      <div class="offer-item"><span class="icon">🚀</span><div>
+        <h3>Quick Start Guide — เห็นผลใน 30 นาทีแรก</h3>
+        <p>ไม่ต้องกลัวหลงทาง เปิดมาทำตาม 4 ขั้น จบด้วย checklist — เขียนแบบเพื่อนสอนเพื่อน ไม่มีศัพท์เทค</p>
+        <span class="val">อ่านจบใน 10 นาที</span>
+      </div></div>
+      <div class="offer-item"><span class="icon">📅</span><div>
+        <h3>แผนติดตั้งระบบ 7 วัน</h3>
+        <p>วันละ 20 นาที ไม่มากกว่านั้น — จบสัปดาห์เดียวได้ระบบครบ loop พร้อมพิธีกรรม Weekly Review ที่ทำให้มันอยู่กับคุณยาว</p>
+        <span class="val">20 นาที × 7 วัน</span>
+      </div></div>
+    </div>
+    <p class="muted" style="font-size:.88rem;margin-top:16px;text-align:center">อัปเดตฟรีเมื่อระบบของผมพัฒนาขึ้น — ซื้อครั้งเดียว ไม่มีรายเดือน</p>
+  </div>
+</section>
+
+<!-- ============ 5. SCREENSHOTS ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shots">
+      <!-- IMAGE: ถ่าย screenshot หน้า Daily Command Center ใน Notion ของจริง (มุมมองมือถือยิ่งดี) -->
+      <div class="shot">🖼 รูปจริง: หน้า Daily Command Center ใน Notion<br>(แทนที่กล่องนี้ด้วย &lt;img&gt;)</div>
+      <!-- IMAGE: ถ่าย screenshot หน้า prompt-library.md หรือ Prompt Vault ที่เห็นรายการ prompts หลายตัว -->
+      <div class="shot">🖼 รูปจริง: คลัง 50 prompts / Prompt Vault<br>(แทนที่กล่องนี้ด้วย &lt;img&gt;)</div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 6. PRICE + LAUNCH OFFER + COUNTDOWN ============ -->
+<section id="price">
+  <div class="wrap">
+    <div class="card price-card">
+      <p class="eyebrow">ราคาเปิดตัว — 7 วันแรกเท่านั้น</p>
+      <p class="price-old">ราคาปกติ 590.-</p>
+      <p class="price-now">390.-</p>
+      <p class="price-note">จ่ายครั้งเดียว ใช้ได้ตลอด + อัปเดตฟรี</p>
+      <div class="count" id="countdown" hidden>
+        <div class="unit"><div class="num" id="cd-d">0</div><div class="lbl">วัน</div></div>
+        <div class="unit"><div class="num" id="cd-h">00</div><div class="lbl">ชม.</div></div>
+        <div class="unit"><div class="num" id="cd-m">00</div><div class="lbl">นาที</div></div>
+        <div class="unit"><div class="num" id="cd-s">00</div><div class="lbl">วินาที</div></div>
+      </div>
+      <p class="muted" id="cd-note" style="font-size:.82rem;margin-top:8px" hidden>เหลือเวลาราคาเปิดตัวอีก</p>
+      <div class="badge-row">
+        <span class="badge">⚡ ได้ของทันทีหลังยืนยันสลิป</span>
+        <span class="badge">🇹🇭 PromptPay / โอนธนาคาร</span>
+        <span class="badge">💬 ถามก่อนซื้อได้ใน LINE</span>
+      </div>
+      <a class="btn js-cta" href="#">รับ AI Workflow OS ที่ 390.-</a>
+      <span class="btn-sub">กดแล้วไปที่ LINE — ทีมงาน (ผมเอง) ตอบไว</span>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 7. HOW TO BUY ============ -->
+<section id="how">
+  <div class="wrap">
+    <p class="eyebrow">สั่งซื้อง่าย ใน 3 ขั้น</p>
+    <h2>โอนปุ๊บ ได้ของปั๊บ</h2>
+    <div class="step"><div class="n">1</div><div>
+      <h3>สแกน / โอนผ่าน PromptPay</h3>
+      <p>ยอด 390 บาท (ราคาเปิดตัว)</p>
+      <div class="pp-box">PromptPay บัญชี: <b>นาย กำชัย คำจร</b> (K+ รับได้ทุกธนาคาร)</div>
+      <!-- IMAGE: บันทึกรูป QR PromptPay (Thai QR ที่มีอยู่แล้ว) เป็นไฟล์ qr-promptpay.jpg
+           วางไว้โฟลเดอร์เดียวกับ index.html แล้วลบ comment ของ img ด้านล่างออก -->
+      <!-- <img src="qr-promptpay.jpg" alt="สแกน QR PromptPay — บัญชี นาย กำชัย คำจร" style="width:100%;max-width:280px;border-radius:14px;margin-top:10px"> -->
+    </div></div>
+    <div class="step"><div class="n">2</div><div>
+      <h3>ส่งสลิปที่ LINE OA</h3>
+      <p>กดปุ่มไหนก็ได้ในหน้านี้ → ส่งสลิปในแชท แค่นั้นเลย</p>
+    </div></div>
+    <div class="step"><div class="n">3</div><div>
+      <h3>รับลิงก์ดาวน์โหลดทันที</h3>
+      <p>ได้ครบทั้ง 4 ชิ้น + เริ่มตาม Quick Start ได้ใน 30 นาที ติดขัดตรงไหนทักถามในแชทเดิมได้ตลอด</p>
+    </div></div>
+    <div style="margin-top:26px">
+      <a class="btn js-cta" href="#">เปิด LINE เพื่อสั่งซื้อ / สอบถาม</a>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 8. FAQ ============ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">คำถามที่ถามกันบ่อย</p>
+    <h2>สงสัยตรงไหน เคลียร์ตรงนี้</h2>
+    <details>
+      <summary>ไม่เก่งเทคโนโลยีเลย จะใช้ได้ไหม</summary>
+      <p>ได้ครับ ระบบนี้ออกแบบมาเพื่อคนไม่เก่งเทคโดยเฉพาะ — ทุกอย่างเป็นภาษาไทย มีคู่มือพาทำทีละคลิก และแผน 7 วันจำกัดไว้วันละ 20 นาที ถ้าใช้ LINE กับพิมพ์แชทได้ ก็ทำตามได้ครับ ติดตรงไหนทักถามผมใน LINE ได้เลย</p>
+    </details>
+    <details>
+      <summary>ต้องจ่ายค่า Notion หรือค่า AI เพิ่มไหม</summary>
+      <p>ไม่จำเป็นครับ Notion มีแผนฟรีที่พอสำหรับระบบนี้ทั้งหมด ส่วน AI ใช้ตัวฟรีของ Claude / ChatGPT / Gemini ได้เลย prompts ทั้ง 50 ตัวออกแบบให้ทำงานกับตัวฟรีได้</p>
+    </details>
+    <details>
+      <summary>ต่างจากดูคลิปสอนฟรีใน TikTok/YouTube ยังไง</summary>
+      <p>คลิปฟรีให้ "ไอเดีย" ครับ แต่แพ็กนี้ให้ "ระบบที่ประกอบเสร็จแล้ว" — พิมพ์เขียวที่สร้างตามได้เลย prompts ที่ทดลองใช้จริงมาแล้วพร้อมตัวอย่าง และแผนติดตั้งที่บอกว่าวันไหนทำอะไร คุณประหยัดเวลาลองผิดลองถูกเองทั้งหมด</p>
+    </details>
+    <details>
+      <summary>ได้ไฟล์เป็นอะไร เข้ายังไง</summary>
+      <p>เป็นไฟล์ digital ทั้งหมด เปิดอ่านได้ทั้งมือถือและคอม ส่งเป็นลิงก์ดาวน์โหลดใน LINE ทันทีหลังยืนยันสลิปครับ ซื้อครั้งเดียวเข้าถึงได้ตลอด และได้อัปเดตฟรีเมื่อผมปรับปรุงระบบ</p>
+    </details>
+    <details>
+      <summary>ซื้อแล้วไม่เหมาะกับเรา ทำยังไง</summary>
+      <p>ทักมาคุยกับผมตรง ๆ ใน LINE ได้เลยครับ ผมอยากให้ของมันถูกใช้จริงมากกว่าแค่ขายได้ — ช่วยปรับให้เข้ากับงานของคุณก่อน และดูแลเป็นราย ๆ ไปจนคุณโอเค<!-- TODO: เจ้าของยืนยันนโยบายคืนเงิน ถ้าจะการันตีคืนเงิน ให้เขียนเงื่อนไขชัดเจนตรงนี้ --></p>
+    </details>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- ============ 9. FINAL CTA ============ -->
+<section style="text-align:center">
+  <div class="wrap">
+    <p class="eyebrow">ถึงตาคุณแล้ว</p>
+    <h2>อีก 7 วันข้างหน้า<br>คุณจะมีระบบ หรือมีแค่ความตั้งใจ</h2>
+    <p class="muted" style="max-width:38ch;margin:0 auto">เดือนหน้าคุณก็ยังยุ่งเหมือนเดิม — สิ่งเดียวที่เปลี่ยนได้คือ "วิธีทำงาน" เริ่มติดตั้งคืนนี้ ใช้จริงพรุ่งนี้เช้า</p>
+    <div style="margin-top:28px">
+      <a class="btn js-cta" href="#">🛒 รับ AI Workflow OS — 390.- (จาก 590.-)</a>
+      <span class="btn-sub">ราคาเปิดตัวถึง 7 วันแรกเท่านั้น · จ่ายครั้งเดียว ใช้ตลอด</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--cream)">กำชัย</b> · Work &amp; Live to 120 yrs — ทำงานเทพ สุขภาพเทพ สำเร็จโดยไม่พัง</p>
+    <p class="fine">สินค้านี้คือระบบจัดการงานและเครื่องมือ AI — ผลลัพธ์ขึ้นอยู่กับการนำไปใช้ของแต่ละคน ไม่มีการรับประกันรายได้หรือผลลัพธ์ใด ๆ และไม่ใช่คำแนะนำทางการแพทย์</p>
+  </div>
+</footer>
+
+<!-- sticky CTA บนมือถือ -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn js-cta" href="#">🛒 สั่งซื้อผ่าน LINE — 390.-</a>
+</div>
+
+<script>
+/* ================= CONFIG — แก้ 2 ค่านี้ก่อน deploy ================= */
+var LINE_OA_URL = "https://lin.ee/ZLhCXt5"; /* LINE OA: กำชัย | AI Workflow (@194vqzxk) */
+var SALE_END    = "2026-07-17T23:59:59+07:00"; /* TODO: วันสิ้นสุดราคาเปิดตัว (ตั้งไว้ +7 วันจากวันเปิดขาย) */
+/* =================================================================== */
+
+/* ใส่ลิงก์ LINE ให้ทุกปุ่ม */
+document.querySelectorAll('.js-cta').forEach(function(a){ a.href = LINE_OA_URL; });
+
+/* countdown — แสดงเฉพาะเมื่อยังไม่หมดเวลา */
+(function(){
+  var end = new Date(SALE_END).getTime();
+  if (isNaN(end)) return;
+  var box = document.getElementById('countdown');
+  var note = document.getElementById('cd-note');
+  var d=document.getElementById('cd-d'), h=document.getElementById('cd-h'),
+      m=document.getElementById('cd-m'), s=document.getElementById('cd-s');
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function tick(){
+    var left = end - Date.now();
+    if (left <= 0){ box.hidden = true; note.hidden = true; clearInterval(t); return; }
+    box.hidden = false; note.hidden = false;
+    d.textContent = Math.floor(left/86400000);
+    h.textContent = pad(Math.floor(left/3600000)%24);
+    m.textContent = pad(Math.floor(left/60000)%60);
+    s.textContent = pad(Math.floor(left/1000)%60);
+  }
+  var t = setInterval(tick, 1000); tick();
+})();
+
+/* sticky CTA โผล่หลังเลื่อนพ้น hero */
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var hero = document.querySelector('.hero');
+  function onScroll(){
+    bar.classList.toggle('show', window.scrollY > hero.offsetHeight);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
+</script>
+</body>
+</html>
